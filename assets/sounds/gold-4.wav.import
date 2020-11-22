@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/gold-4.wav-eec035dd4a7d10481cbf191b5cc91d3b.sample"
+
+[deps]
+
+source_file="res://assets/sounds/gold-4.wav"
+dest_files=[ "res://.import/gold-4.wav-eec035dd4a7d10481cbf191b5cc91d3b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
