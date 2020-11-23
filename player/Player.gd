@@ -1,7 +1,7 @@
 extends Area2D
 
-var speed:float = 100
-var velocity:Vector2 = Vector2(0, 0)
+export var speed:float = 300
+var velocity := Vector2(0, 0)
 
 func _ready():
 	pass # Replace with function body.
@@ -11,7 +11,7 @@ func _process(delta):
 	
 func _physics_process(delta):
 	# Set direction vector
-	var directionVector:Vector2 = Vector2(0, 0)
+	var directionVector := Vector2(0, 0)
 	# Reset velocity vector
 	velocity.x = 0
 	velocity.y = 0
@@ -30,3 +30,8 @@ func _physics_process(delta):
 	velocity = directionVector.normalized() * speed
 	# Apply vector to position
 	position += velocity * delta
+	
+	# Stay within viewport - need to change to account for sprite size
+	var viewportRect := get_viewport_rect()
+	position.x = clamp(position.x, viewportRect.position.x, viewportRect.end.x)
+	position.y = clamp(position.y, viewportRect.position.y, viewportRect.end.y)
