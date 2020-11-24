@@ -3,7 +3,10 @@ extends Area2D
 var plBullet := preload("res://bullet/Bullet.tscn")
 
 onready var animatedSprite := $AnimatedSprite
+onready var firingPositions := $FiringPositions
+onready var fireDelayTimer := $FireDelayTimer
 
+export var fireDelay:float = 0.1
 export var speed:float = 300
 var velocity := Vector2(0, 0)
 
@@ -11,14 +14,22 @@ func _ready():
 	pass
 
 func _process(delta):
+	# Function to animate the player movements etc
+	animatePlayer()
+	
+func _physics_process(delta):
+	processMovement(delta)
+	processAction(delta)
+
+func animatePlayer():
 	if velocity.x < 0:
 		animatedSprite.play("idle")
 	elif velocity.x > 0:
 		animatedSprite.play("idle")
 	else:
-		animatedSprite.play("idle")
-	
-func _physics_process(delta):
+		animatedSprite.play("idle")	
+
+func processMovement(delta):
 	# Set direction vector
 	var directionVector := Vector2(0, 0)
 	# Reset velocity vector
@@ -44,10 +55,11 @@ func _physics_process(delta):
 	var viewportRect := get_viewport_rect()
 	position.x = clamp(position.x, viewportRect.position.x, viewportRect.end.x)
 	position.y = clamp(position.y, viewportRect.position.y, viewportRect.end.y)
-	
-	if Input.is_action_pressed("shoot"):
-		var bullet := plBullet.instance()
-		bullet.position = position
-		bullet.position.x += 26
-		bullet.position.y += 3
-		get_tree().current_scene.add_child(bullet)
+
+func processAction(delta):
+	if Input.is_action_pressed("shoot") and fireDelayTimer.is_stopped():
+		fireDelayTimer.start(fireDelay)
+		for child in firingPositions.get_children():
+			var bullet := plBullet.instance()
+			bullet.global_position = child.global_position
+			get_tree().current_scene.add_child(bullet)	

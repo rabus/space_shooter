@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/ships/5.png" type="Texture" id=1]
 [ext_resource path="res://player/Player.gd" type="Script" id=2]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
@@ -11,7 +11,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 12.0421
 height = 11.6331
 
@@ -20,9 +20,17 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 rotation = -1.5708
-frames = SubResource( 2 )
+frames = SubResource( 1 )
 animation = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = -1.5708
-shape = SubResource( 1 )
+shape = SubResource( 2 )
+
+[node name="FiringPositions" type="Node2D" parent="."]
+
+[node name="MainGun" type="Node2D" parent="FiringPositions"]
+position = Vector2( 27.3576, 3.24451 )
+
+[node name="FireDelayTimer" type="Timer" parent="."]
+one_shot = true
