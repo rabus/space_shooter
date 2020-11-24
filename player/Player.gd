@@ -1,13 +1,22 @@
 extends Area2D
 
+var plBullet := preload("res://bullet/Bullet.tscn")
+
+onready var animatedSprite := $AnimatedSprite
+
 export var speed:float = 300
 var velocity := Vector2(0, 0)
 
 func _ready():
-	pass # Replace with function body.
+	pass
 
 func _process(delta):
-	pass
+	if velocity.x < 0:
+		animatedSprite.play("idle")
+	elif velocity.x > 0:
+		animatedSprite.play("idle")
+	else:
+		animatedSprite.play("idle")
 	
 func _physics_process(delta):
 	# Set direction vector
@@ -35,3 +44,10 @@ func _physics_process(delta):
 	var viewportRect := get_viewport_rect()
 	position.x = clamp(position.x, viewportRect.position.x, viewportRect.end.x)
 	position.y = clamp(position.y, viewportRect.position.y, viewportRect.end.y)
+	
+	if Input.is_action_pressed("shoot"):
+		var bullet := plBullet.instance()
+		bullet.position = position
+		bullet.position.x += 26
+		bullet.position.y += 3
+		get_tree().current_scene.add_child(bullet)
