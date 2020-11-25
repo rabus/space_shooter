@@ -27,6 +27,9 @@ animation = "idle"
 rotation = -1.5708
 shape = SubResource( 2 )
 
+[node name="Thrusters" type="Node2D" parent="."]
+rotation = -1.5708
+
 [node name="FiringPositions" type="Node2D" parent="."]
 
 [node name="MainGun" type="Node2D" parent="FiringPositions"]

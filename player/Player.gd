@@ -55,11 +55,12 @@ func processMovement(delta):
 	var viewportRect := get_viewport_rect()
 	position.x = clamp(position.x, viewportRect.position.x, viewportRect.end.x)
 	position.y = clamp(position.y, viewportRect.position.y, viewportRect.end.y)
-
+	
 func processAction(delta):
 	if Input.is_action_pressed("shoot") and fireDelayTimer.is_stopped():
 		fireDelayTimer.start(fireDelay)
 		for child in firingPositions.get_children():
 			var bullet := plBullet.instance()
+			fireDelay = bullet.call("getCooldown")
 			bullet.global_position = child.global_position
 			get_tree().current_scene.add_child(bullet)	
