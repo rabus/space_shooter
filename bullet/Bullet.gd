@@ -4,7 +4,7 @@ onready var shootingSound := $AudioStreamPlayer2D
 onready var animateBullet := $AnimatedSprite
 
 export var speed:float = 500
-export var cooldown:float = 0.2
+export var cooldown:float = 0.1
 
 var lifespan:float = 60
 var timer:float = 0

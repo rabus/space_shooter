@@ -12,7 +12,6 @@ centered = false
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Background"]
 position = Vector2( 643.739, 188.968 )
-emitting = false
 amount = 50
 lifetime = 4.0
 emission_shape = 2
